@@ -1,0 +1,54 @@
+server:
+   port: 8080
+management:
+   endpoint:
+      gateway:
+         enabled: true
+   endpoints:
+      web:
+         exposure:
+            include: gateway
+eureka:
+   client:
+      serviceUrl:
+         defaultZone: http://localhost:8761/eureka/
+security:
+   oauth2:
+      client:
+         registration:
+            gateway:
+               provider: uaa
+               client-id: gateway
+               client-secret: secret
+               authorization-grant-type: authorization_code
+               redirect-uri-template: '{baseUrl}/login/oauth2/code/{registrationId}'
+               scope: openid,profile,email,resource.read
+         provider:
+            uaa:
+               authorization-uri: http://localhost:8090/uaa/oauth/authorize
+               token-uri: http://uaa:8090/uaa/oauth/token
+               user-info-uri: http://uaa:8090/uaa/userinfo
+               user-name-attribute: sub
+               jwk-set-uri: http://uaa:8090/uaa/token_keys
+spring:
+   cloud:
+      gateway:
+         discovery:
+            locator:
+               lowerCaseServiceId: true
+               enabled: true
+               lower-case-service-id: true
+         routes:
+         -  id: payment-service
+            uri: lb://payment-service
+            predicates:
+            - Path=/payment-service/**
+         -  id: user-service
+            uri: lb://user-service
+            predicates:
+            - Path=/user-service/**
+   sleuth:
+      sampler:
+         probability: 1.0
+      zipkin:
+         base-url: http://localhost:9411

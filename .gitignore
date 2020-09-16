@@ -1,0 +1,52 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+*.hot-update.json
+*.hot-update.js
+*.hot-update.js.map
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+node_modules
+.DS_Store
+package-lock.json
+.vscode
+build
+.idea
+
+.metadata
+.metadata/
+target
+bower_components
+node
+*.log
+asciidoctor.css
+README.html
+built
+dump.rdb
+package-lock.json
+settings.json

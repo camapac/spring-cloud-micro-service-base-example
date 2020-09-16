@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+   vita_sso:
+      image: mysql:latest
+      container_name: vita_sso
+      ports:
+      - 3307:3306
+      expose:
+      - '3307'
+      restart: always
+      environment:
+         MYSQL_ROOT_PASSWORD: vita1!#%
+         MYSQL_DATABASE: vita_sso
+         MYSQL_USER: vita_user
+         MYSQL_PASSWORD: vita_user!#%123
+   user_profile:
+      image: mysql:latest
+      container_name: user_profile
+      ports:
+      - 3308:3306
+      expose:
+      - '3308'
+      restart: always
+      environment:
+         MYSQL_ROOT_PASSWORD: vita1!#%
+         MYSQL_DATABASE: user_profile
+         MYSQL_USER: vita_user
+         MYSQL_PASSWORD: vita_user!#%123

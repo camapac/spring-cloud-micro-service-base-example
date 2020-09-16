@@ -1,0 +1,40 @@
+version: '3.3'
+
+services:
+  reverse-proxy:
+    # The official v2 Traefik docker image
+    image: traefik:latest
+    # Enables the web UI and tells Traefik to listen to docker
+    command: 
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
+      - "--providers.file.filename=./traefik.yml"
+    ports:
+      # The HTTP port
+      - "80:80"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.yaml:/traefik.yaml
+
+  consul:
+    image: "consul:latest"
+    volumes:
+      - ./consul/data:/consul/data
+      - ./consul/config:/consul/config
+    environment:
+      - "CONSUL_LOCAL_CONFIG={\"disable_update_check\": true, \"skip_leave_on_interrupt\": true}"
+    entrypoint:
+      - consul
+      - agent
+      - -server
+      - -data-dir=/consul
+      - -bootstrap-expect=1
+      - -ui 
+      - -client=0.0.0.0
+    ports:
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:53"

@@ -1,0 +1,30 @@
+server:
+  port: 9091
+  servlet:
+     contextPath: /payment-service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://localhost:9411
+    
+security:
+   jwt:
+      publicKey: file:/Users/camapac/workspace/vita/vita-ssl/public.txt
+      value: |
+         -----BEGIN PUBLIC KEY-----
+         MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmoxJUkxZ8xe+QTfhe/yP
+         xsRlWc/q4lDcaxTRkAbAsd4UfQ9Dvv+Vsx0XSN3AQNpRFMkaa/hUwPAB267M6mVz
+         yue50Q2LxDAHnTURsZ6unJKYW4LCy35PHgil2+mx4i58FasgNjokQAD+ZAuaRbQD
+         P27L3bgO48hjAfVKJczX9lKE8XQ723izR2VaCTjFHz4+Ioz/RFJxxidOGnNiOoMO
+         NzZLLYuG96pD9oUwSQjpjReA2H7rsCl1hrSQMZ2ctPxMpviOkenzNjVgB4F3HDb1
+         +DO/YTzdQBuJvgEX7EjtjUgiw43rLa01JzASS+lLWbf9WIDE4AnSgiw1vh+Yj2cQ
+         SQIDAQAB
+         -----END PUBLIC KEY-----

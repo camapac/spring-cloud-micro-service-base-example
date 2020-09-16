@@ -1,0 +1,28 @@
+server:
+   port: 9999
+spring:
+   datasource:
+      url: jdbc:mysql://192.168.35.113:3307/vita_sso?useSSL=false&allowPublicKeyRetrieval=true #192.168.35.113
+      username: vita_user
+      password: vita_user!#%123
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      tomcat:
+         test-while-idle: true
+         validation-query: SELECT 1
+      initialization-mode: never
+      platform: mysql
+   jpa:
+      properties:
+         hibernate:
+            dialect: org.hibernate.dialect.MySQL8Dialect
+      hibernate:
+         naming:
+            physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+         ddl-auto: validate
+check-user-scopes: true
+security:
+   jwt:
+      key-store: /Users/camapac/workspace/xproject/vita_ssl/mykeystore.jks
+      key-store-password: vita12Kq1
+      key-pair-alias: servercert
+      key-pair-password: vita12Kq1
